@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Mr.Li`s CodeLab">
 <meta property="og:description" content="前言puppeteer的出现让其他的JavaScript脚本写的爬虫程序黯然失色，puppeteer的是Google团队开发的一款针对chrome浏览器的性能极强的爬虫程序，本文中的主要内容便是基于puppeteer实现一个简单的爬虫程序，实例代码主要是爬取百度的高清壁纸，并自动化的保存到本地磁盘。 系统环境要求NodeJS、可以使用npm、puppeteer 1、安装NodeJS 2、安装pup">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2018-01-03T09:21:54.489Z">
+<meta property="og:updated_time" content="2018-01-03T10:34:13.820Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="做一个Javascript网页爬虫">
 <meta name="twitter:description" content="前言puppeteer的出现让其他的JavaScript脚本写的爬虫程序黯然失色，puppeteer的是Google团队开发的一款针对chrome浏览器的性能极强的爬虫程序，本文中的主要内容便是基于puppeteer实现一个简单的爬虫程序，实例代码主要是爬取百度的高清壁纸，并自动化的保存到本地磁盘。 系统环境要求NodeJS、可以使用npm、puppeteer 1、安装NodeJS 2、安装pup">
@@ -56,7 +56,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -92,11 +92,17 @@
 <p>1、安装NodeJS</p>
 <p>2、安装puppeteer，使用npm安装时会出现错误，主要是因为国内暂不支持chormize的下载，需要翻墙才可以；<br>所以采用第二种办法，先使用npm安装阿里云的cnpm，命令如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install cnpm -g</span><br></pre></td></tr></table></figure></p>
 <p>然后使用cnpm安装puppeteer即可，代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm install puppeteer -g</span><br></pre></td></tr></table></figure></p>
-<h3 id="代码编写"><a href="#代码编写" class="headerlink" title="代码编写"></a>代码编写</h3>
+<h3 id="代码编写"><a href="#代码编写" class="headerlink" title="代码编写"></a>代码编写</h3><p>1、初始化项目，首先建立空文件夹，在该目录下的控制台键入命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm init -y</span><br></pre></td></tr></table></figure></p>
+<p>2、此时文件目录中应该包括了package.json文件，由于全局安装了puppeteer，所以此时无须再次安装；若不想全局安装，则执行以下命令即可（生产环境可用）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm install puppeteer -S</span><br></pre></td></tr></table></figure></p>
+<p>3、准备工作完成了即可以编写核心的爬虫代码了，本实例代码只为了验证爬虫的执行，就不进行结构化书写代码了，绝大部分的代码只包含在一个文件中即可，方便大家理解；为了将爬取的内容保存下来，在根目录下新建一个download文件夹；然后在根目录下新建一个main.js文件，文件内容编写代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">const puppeteer = require(&apos;puppeteer&apos;);</span><br><span class="line">const path = require(&apos;path&apos;);</span><br><span class="line">const dir = path.resolve(__dirname,&quot;../download&quot;);</span><br><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">(async ()=&gt;&#123;</span><br><span class="line">    const browser = await puppeteer.launch();</span><br><span class="line">    const page = await browser.newPage();</span><br><span class="line">    await page.goto(&quot;http://www.baidu.com&quot;,&#123;waitUntil:&apos;networkidle2&apos;&#125;);</span><br><span class="line">    console.log(&quot;loading...&quot;);</span><br><span class="line"></span><br><span class="line">    await page.setViewport(&#123;</span><br><span class="line">        width:1920,</span><br><span class="line">        height:5080</span><br><span class="line">    &#125;);</span><br><span class="line">    console.log(&quot;set Viewport done.&quot;);</span><br><span class="line"></span><br><span class="line">    const s_def = &quot;武侠小说&quot;;</span><br><span class="line">    await page.type(&quot;#kw&quot;,s_def);</span><br><span class="line">    await page.click(&quot;#su&quot;);</span><br><span class="line">    await page.waitFor(2000);  //必须等待，否则浏览器不能正确刷新页面。</span><br><span class="line">    console.log(&apos;Search input has done.&apos;);</span><br><span class="line"></span><br><span class="line">    const file_pdf = path.join(dir,`$&#123;Date.now()&#125;.pdf`);</span><br><span class="line">    const file_png = path.join(dir,`$&#123;Date.now()&#125;.png`);</span><br><span class="line">    const file_txt = path.join(dir,`$&#123;Date.now()&#125;.txt`);</span><br><span class="line">    const file_md = path.join(dir,`$&#123;Date.now()&#125;.md`);</span><br><span class="line"></span><br><span class="line">    await page.pdf(&#123;</span><br><span class="line">            path:file_pdf,</span><br><span class="line">            format:&quot;letter&quot;</span><br><span class="line">    &#125;);</span><br><span class="line">    await page.screenshot(&#123;path:file_png,fullscreen:true&#125;);</span><br><span class="line">    console.log(&quot;PDF and screenCapture has Process done.&quot;);</span><br><span class="line"></span><br><span class="line">    await page.waitFor(&quot;.c-container&quot;);</span><br><span class="line"></span><br><span class="line">    const selector = &quot;.c-container h3 a&quot;;</span><br><span class="line">    const text_content = await page.$$eval(selector,anchors=&gt;anchors.map(anchor=&gt;&#123;</span><br><span class="line">        const title = anchor.innerHTML.trim();</span><br><span class="line">        const href = anchor.getAttribute(&quot;href&quot;);</span><br><span class="line">        return `$&#123;title&#125;---$&#123;href&#125;`;</span><br><span class="line">    &#125;));</span><br><span class="line"></span><br><span class="line">    text_content.map(text=&gt;&#123;fs.appendFile(file_txt, text+&quot;\n&quot;, (err) =&gt; &#123;</span><br><span class="line">        if (err) throw err;</span><br><span class="line">        console.log(&apos;The &quot;data&quot; was appended to file!&apos;);</span><br><span class="line">    &#125;)&#125;);</span><br><span class="line"></span><br><span class="line">    const writer = fs.createWriteStream(file_md,(err)=&gt;&#123;if(err) throw err;&#125;);</span><br><span class="line">    text_content.map(text=&gt;writer.write(text+&quot;\n\n&quot;,(err)=&gt;&#123;</span><br><span class="line">        if(err) throw err;</span><br><span class="line">        console.log(&quot;mdFile has download.&quot;);</span><br><span class="line">    &#125;));</span><br><span class="line"></span><br><span class="line">   await browser.close();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>4、执行代码，在命令行键入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node main.js</span><br></pre></td></tr></table></figure></p>
+<p>5、此时打开download目录即可看到从百度搜索中爬取到的内容了。</p>
+<h3 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h3><p>简单的一个写爬虫的代码，很容易实现，如需了解更多有关puppeteer的详细内容，直接到GitHub上搜索puppeteer即可，本人主要是兴趣使然，刚开始研究这玩意，也欢迎大家有问题一起交流，项目代码地址<a href="https://github.com/BetaLi/handless" target="_blank" rel="noopener">Github</a>。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/04/blog-2/" data-id="cjbytwajm00002ktu1jyx480b" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/01/04/blog-2/" data-id="cjbytwajm00002ktu1jyx480b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/puppeteer-nodeJS/">puppeteer nodeJS</a></li></ul>
@@ -109,7 +115,7 @@
   
   
     <a href="/2017/12/26/myBlog/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">Blog-1</div>
     </a>
   
@@ -146,7 +152,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
     </div>
@@ -156,7 +162,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
