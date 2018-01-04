@@ -51,7 +51,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -61,6 +61,44 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-blog-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/05/blog-3/" class="article-date">
+  <time datetime="2018-01-04T16:22:42.000Z" itemprop="datePublished">2018-01-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/05/blog-3/">nodeJS 中的stream对象</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/05/blog-3/" data-id="cjc086u5n000028tuvdiqbvpa" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stream/">stream</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-blog-2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -87,7 +125,7 @@
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>puppeteer的出现让其他的JavaScript脚本写的爬虫程序黯然失色，puppeteer的是Google团队开发的一款针对chrome浏览器的性能极强的爬虫程序，本文中的主要内容便是基于puppeteer实现一个简单的爬虫程序，实例代码主要是爬取百度的高清壁纸，并自动化的保存到本地磁盘。</p>
 <h3 id="系统环境要求"><a href="#系统环境要求" class="headerlink" title="系统环境要求"></a>系统环境要求</h3><p>NodeJS、可以使用npm、puppeteer</p>
 <p>1、安装NodeJS</p>
-<p>2、安装puppeteer，使用npm安装时会出现错误，主要是因为国内暂不支持chormize的下载，需要翻墙才可以；<br>所以采用第二种办法，先使用npm安装阿里云的cnpm，命令如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install cnpm -g</span><br></pre></td></tr></table></figure></p>
+<p>2、安装puppeteer，使用npm安装时会出现错误，主要是因为国内暂不支持chormize的下载，需要翻墙才可以；所以采用第二种办法，先使用npm安装阿里云的cnpm，命令如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install cnpm -g</span><br></pre></td></tr></table></figure></p>
 <p>然后使用cnpm安装puppeteer即可，代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm install puppeteer -g</span><br></pre></td></tr></table></figure></p>
 <h3 id="代码编写"><a href="#代码编写" class="headerlink" title="代码编写"></a>代码编写</h3><p>1、初始化项目，首先建立空文件夹，在该目录下的控制台键入命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm init -y</span><br></pre></td></tr></table></figure></p>
 <p>2、此时文件目录中应该包括了package.json文件，由于全局安装了puppeteer，所以此时无须再次安装；若不想全局安装，则执行以下命令即可（生产环境可用）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm install puppeteer -S</span><br></pre></td></tr></table></figure></p>
@@ -99,7 +137,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/04/blog-2/" data-id="cjbytwajm00002ktu1jyx480b" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/01/04/blog-2/" data-id="cjc086u6a000428tu69qj5rrp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/puppeteer-nodeJS/">puppeteer nodeJS</a></li></ul>
@@ -139,7 +177,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/26/blog-1/" data-id="cjbyxhhag00000ctu76pybu3j" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2017/12/26/blog-1/" data-id="cjc086u5u000128tuqeikxm1s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -185,7 +223,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/25/hello-world/" data-id="cjbytrhy00000xstu9pha8nnc" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2017/12/25/hello-world/" data-id="cjc086u6c000528tuf4zb0frv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -208,7 +246,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/puppeteer-nodeJS/">puppeteer nodeJS</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/puppeteer-nodeJS/">puppeteer nodeJS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stream/">stream</a></li></ul>
     </div>
   </div>
 
@@ -218,14 +256,14 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/puppeteer-nodeJS/" style="font-size: 10px;">puppeteer nodeJS</a>
+      <a href="/tags/puppeteer-nodeJS/" style="font-size: 10px;">puppeteer nodeJS</a> <a href="/tags/stream/" style="font-size: 10px;">stream</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
     </div>
@@ -235,9 +273,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/05/blog-3/">nodeJS 中的stream对象</a>
+          </li>
         
           <li>
             <a href="/2018/01/04/blog-2/">做一个Javascript网页爬虫</a>
