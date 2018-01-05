@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Mr.Li`s CodeLab">
 <meta property="og:description" content="前言如果你是一名当今世界的前端开发者，那么流一定是一个你需要掌握的概念。如果你想成为一个前端开发高手，那么流一定是武功秘籍中不可缺少的一个部分。本文中的部分内容来自GitHub上的开源社区。 为什么要使用流，流到底是什么“流(stream)在 Node.js 中是处理流数据的抽象接口(abstract interface)。 stream 模块提供了基础的 API 。使用这些 API 可以很容易地">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2018-01-05T04:10:06.432Z">
+<meta property="og:updated_time" content="2018-01-05T07:15:31.289Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nodeJS 中的stream对象">
 <meta name="twitter:description" content="前言如果你是一名当今世界的前端开发者，那么流一定是一个你需要掌握的概念。如果你想成为一个前端开发高手，那么流一定是武功秘籍中不可缺少的一个部分。本文中的部分内容来自GitHub上的开源社区。 为什么要使用流，流到底是什么“流(stream)在 Node.js 中是处理流数据的抽象接口(abstract interface)。 stream 模块提供了基础的 API 。使用这些 API 可以很容易地">
@@ -56,7 +56,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -97,20 +97,20 @@
 <p>上述的代码等同于以下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a.pipe(b)</span><br><span class="line">b.pipe(c)</span><br><span class="line">c.pipe(d)</span><br></pre></td></tr></table></figure></p>
 <p>介绍了 <code>src.pipe(dst)</code> 的用法之后，我们需要知道不是所有的属性的流都可以有 <code>.pipe()</code> 方法的，只有可读的流才可以调用该方法，举个例子就如上述的链式调用可以实现就必须要求 <code>b,c,d</code> 本身即是一个可读的流也是一个可写的流，一句话就是，可读的流可以产生数据，再 pipe 到一个可写的流中去。就相当于源源不断的从可读的流文件中读取数据，再源源不断的写入一个可写的流文件中去，实现流最强大的功能。</p>
 <h3 id="创建并使用流"><a href="#创建并使用流" class="headerlink" title="创建并使用流"></a>创建并使用流</h3><p>说完了流的用法之后，如何创建流是接下来讨论的问题。nodeJS中的 stream 模块可以通过以下方式引入：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> stream = <span class="built_in">require</span>(<span class="string">"stream"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>尽管所有的 Node.js 用户都应该理解流的工作方式，这点很重要， 但是 stream 模块本身只对于那些需要创建新的流的实例的开发者最有用处。 对于主要是 <i>消费流</i> 的开发者来说，他们很少（如果有的话）需要直接使用 stream 模块。</p>
+<p>尽管所有的 Node.js 用户都应该理解流的工作方式，这点很重要， 但是 stream 模块本身只对于那些需要创建新的流的实例的开发者最有用处。 对于主要是 <i>消费流</i> 的开发者来说，他们很少（如果有的话）需要直接使用 stream 模块。在nodeJS中的fs模块中就封装了很好用的模块，下面的例子就是用来创建一个的可写的流和一个可读的流，并 pipe 到可写的流中去：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> file_r = path.join(__dirname,<span class="string">"/test-data.txt"</span>);</span><br><span class="line"><span class="keyword">const</span> file_w = path.join(__dirname,<span class="string">"/test.txt"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> reader = fs.createReadStream(file_r,(err)=&gt;&#123;<span class="keyword">if</span>(err) <span class="keyword">throw</span> err;&#125;);</span><br><span class="line"><span class="keyword">const</span> writer = fs.createWriteStream(file_w,(err)=&gt;&#123;<span class="keyword">if</span>(err) <span class="keyword">throw</span> err;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//直接向reader的buffer中写入数据可以采用，当buffer压入null是触发 end 事件</span></span><br><span class="line">reader.push(<span class="string">"Arrow"</span>)</span><br><span class="line">reader.push(<span class="string">"Flash"</span>)</span><br><span class="line">reader.push(<span class="string">"Superman"</span>)</span><br><span class="line">reader.push(<span class="literal">null</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//将reader缓存中的数据和实际文件中的数据 pipe 到可写的流中去</span></span><br><span class="line">reader.pipe(writer)</span><br></pre></td></tr></table></figure></p>
 <h3 id="流的执行原理"><a href="#流的执行原理" class="headerlink" title="流的执行原理"></a>流的执行原理</h3><p>Node.js 中有四种基本的流类型：<br>1、Readable - 可读的流 (例如<code>fs.createReadStream()</code>)<br>2、Writable - 可写的流 (例如<code>fs.createWriteStream()</code>)<br>3、Duplex - 可读写的流 (例如<code>net.Socket</code>)<br>4、Transform - 在读写过程中可以修改和变换数据的 Duplex 流 (例如<code>zlib.createDeflate()</code>).</p>
 <ul>
 <li>Readable 和 Writable流都会将数据存储到内部的缓存中。这些缓存可以通过相应<code>writable._writableState.getBuffer()</code>或<code>readable._readableState.buffer</code>来获取缓存中的内容。</li>
 <li>当可读流的实现调用 <code>stream.push(chunk)</code> 方法时，数据被放到缓存中。如果流的 <i>消费者</i> 没有调用 <code>stream.read()</code> 方法， 这些数据会始终存在于内部队列中，直到被消费。</li>
 <li>当内部可读缓存的大小达到 highWaterMark 指定的阈值时，流会暂停从底层资源读取数据，直到当前 缓存的数据被消费 (也就是说， 流会在内部停止调用 <code>readable._read()</code> 来填充可读缓存)。</li>
-<li>可写流通过反复调用 <code>writable.write(chunk)</code> 方法将数据放到缓存。 当内部可写缓存的总大小小于 highWaterMark 指定的阈值时， 调用 <code>writable.write()</code> 将返回true。 一旦内部缓存的大小达到或超过 highWaterMark ，调用 <code>writable.write()</code> 将返回 false 。</li>
+<li>可写流通过反复调用 <code>writable.write(chunk)</code> 方法将数据放到缓存。当内部可写缓存的总大小小于 highWaterMark 指定的阈值时， 调用 <code>writable.write()</code> 将返回true。 一旦内部缓存的大小达到或超过 highWaterMark ，调用 <code>writable.write()</code> 将返回 false 。</li>
 <li>stream API 的关键目标， 尤其对于 <code>stream.pipe()</code> 方法， 就是限制缓存数据大小，以达到可接受的程度。这样，对于读写速度不匹配的源头和目标，就不会超出可用的内存大小。</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/05/blog-3/" data-id="cjc1bl3s20003v4tucbn1to95" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/01/05/blog-3/" data-id="cjc1bl3s20003v4tucbn1to95" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stream/">stream</a></li></ul>
@@ -123,7 +123,7 @@
   
   
     <a href="/2018/01/04/blog-2/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">做一个Javascript网页爬虫</div>
     </a>
   
@@ -160,7 +160,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
     </div>
@@ -170,7 +170,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
