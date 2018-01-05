@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Mr.Li`s CodeLab">
 <meta property="og:description" content="前言如果你是一名当今世界的前端开发者，那么流一定是一个你需要掌握的概念。如果你想成为一个前端开发高手，那么流一定是武功秘籍中不可缺少的一个部分。本文中的部分内容来自GitHub上的开源社区。 为什么要使用流，流到底是什么“流(stream)在 Node.js 中是处理流数据的抽象接口(abstract interface)。 stream 模块提供了基础的 API 。使用这些 API 可以很容易地">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2018-01-05T02:28:02.534Z">
+<meta property="og:updated_time" content="2018-01-05T02:40:43.333Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nodeJS 中的stream对象">
 <meta name="twitter:description" content="前言如果你是一名当今世界的前端开发者，那么流一定是一个你需要掌握的概念。如果你想成为一个前端开发高手，那么流一定是武功秘籍中不可缺少的一个部分。本文中的部分内容来自GitHub上的开源社区。 为什么要使用流，流到底是什么“流(stream)在 Node.js 中是处理流数据的抽象接口(abstract interface)。 stream 模块提供了基础的 API 。使用这些 API 可以很容易地">
@@ -54,9 +54,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -93,16 +93,16 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">req,res</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> reader = fs.createReadStream(__dirname+<span class="string">"/data.txt"</span>);</span><br><span class="line">    reader.pipe(res);</span><br><span class="line">&#125;);</span><br><span class="line">server.on(<span class="string">"connection"</span>,()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"Someone connected."</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">5588</span>);</span><br></pre></td></tr></table></figure>
 <p>通过fs模块创建一个可读的流，用来读取data.txt中的一百万行数据，在将读取到的数据流 pipe 到 响应结果的 res 中，这样客户端发起请求的时候就大大减少了等待的时间，服务器端的数据源源不断的 pipe 到响应中去。在这里，.pipe()方法会自动帮助我们监听data和end事件。上面的这段代码不仅简洁，而且data.txt文件中每一小段数据都将源源不断的发送到客户端。除此之外，使用.pipe()方法还有别的好处，比如说它可以自动控制后端压力，以便在客户端连接缓慢的时候node可以将尽可能少的缓存放到内存中。</p>
 <h3 id="pipe-的使用"><a href="#pipe-的使用" class="headerlink" title=".pipe()的使用"></a>.pipe()的使用</h3><p>无论哪一种流，都会使用.pipe()方法来实现输入和输出。.pipe()函数很简单，它仅仅是接受一个源头src并将数据输出到一个可写的流dst中：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src.pipe(dst)</span><br></pre></td></tr></table></figure></p>
-<p><code>.pipe(dst)</code> 将会返回dst因此你可以链式调用多个流:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.pipe(b).pipe(c).pipe(d)</span><br></pre></td></tr></table></figure></p>
+<p><code>.pipe(dst)</code> 将会返回 <code>dst</code> ,因此你可以链式调用多个流:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a.pipe(b).pipe(c).pipe(d)</span><br></pre></td></tr></table></figure></p>
 <p>上述的代码等同于以下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a.pipe(b)</span><br><span class="line">b.pipe(c)</span><br><span class="line">c.pipe(d)</span><br></pre></td></tr></table></figure></p>
 <p>介绍了 <code>src.pipe(dst)</code> 的用法之后，我们需要知道不是所有的属性的流都可以有 <code>.pipe()</code> 方法的，只有可读的流才可以调用该方法，举个例子就如上述的链式调用可以实现就必须要求 <code>b,c,d</code> 本身即是一个可读的流也是一个可写的流，一句话就是，可读的流可以产生数据，再 pipe 到一个可写的流中去。就相当于源源不断的从可读的流文件中读取数据，再源源不断的写入一个可写的流文件中去，实现流最强大的功能。</p>
 <h3 id="创建并使用流"><a href="#创建并使用流" class="headerlink" title="创建并使用流"></a>创建并使用流</h3><p>说完了流的用法之后，如何创建流是接下来讨论的问题。nodeJS中的 stream 模块可以通过以下方式引入：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> stream = <span class="built_in">require</span>(<span class="string">"stream"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>尽管所有的 Node.js 用户都应该理解流的工作方式，这点很重要， 但是 stream 模块本身只对于那些需要创建新的流的实例的开发者最有用处。 对于主要是 <i>消费流</i> 的开发者来说，他们很少（如果有的话）需要直接使用 stream 模块。</p>
+<p>尽管所有的 Node.js 用户都应该理解流的工作方式，这点很重要， 但是 stream 模块本身只对于那些需要创建新的流的实例的开发者最有用处。 对于主要是 <i>消费流</i> 的开发者来说，他们很少（如果有的话）需要直接使用 stream 模块。<br>Node.js 中有四种基本的流类型：<br>1、Readable - 可读的流 (例如 fs.createReadStream())<br>2、Writable - 可写的流 (例如 fs.createWriteStream())<br>3、Duplex - 可读写的流 (例如 net.Socket)<br>4、Transform - 在读写过程中可以修改和变换数据的 Duplex 流 (例如 zlib.createDeflate()).<br>Writable 和 Readable 流都会将数据存储到内部的缓存（buffer）中。这些缓存可以 通过相应的 <code>writable._writableState.getBuffer()</code> 或 <code>readable._readableState.buffer</code> 来获取。<br>当可读流的实现调用 <code>stream.push(chunk)</code> 方法时，数据被放到缓存中。如果流的 <i>消费者</i> 没有调用 <code>stream.read()</code> 方法， 这些数据会始终存在于内部队列中，直到被消费。<br>当内部可读缓存的大小达到 highWaterMark 指定的阈值时，流会暂停从底层资源读取数据，直到当前 缓存的数据被消费 (也就是说， 流会在内部停止调用 <code>readable._read()</code> 来填充可读缓存)。<br>可写流通过反复调用 <code>writable.write(chunk)</code> 方法将数据放到缓存。 当内部可写缓存的总大小小于 highWaterMark 指定的阈值时， 调用 <code>writable.write()</code> 将返回true。 一旦内部缓存的大小达到或超过 highWaterMark ，调用 <code>writable.write()</code> 将返回 false 。<br>stream API 的关键目标， 尤其对于 <code>stream.pipe()</code> 方法， 就是限制缓存数据大小，以达到可接受的程度。这样，对于读写速度不匹配的源头和目标，就不会超出可用的内存大小。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/05/blog-3/" data-id="cjc086u5n000028tuvdiqbvpa" class="article-share-link">Teilen</a>
+      <a data-url="http://yoursite.com/2018/01/05/blog-3/" data-id="cjc086u5n000028tuvdiqbvpa" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stream/">stream</a></li></ul>
@@ -115,7 +115,7 @@
   
   
     <a href="/2018/01/04/blog-2/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">做一个Javascript网页爬虫</div>
     </a>
   
@@ -133,7 +133,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/puppeteer-nodeJS/">puppeteer nodeJS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stream/">stream</a></li></ul>
     </div>
@@ -143,7 +143,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/puppeteer-nodeJS/" style="font-size: 10px;">puppeteer nodeJS</a> <a href="/tags/stream/" style="font-size: 10px;">stream</a>
     </div>
@@ -152,7 +152,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
     </div>
@@ -162,7 +162,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -195,7 +195,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 Lcoder<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé par <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
