@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>JavaScript设计模式：工厂模式及构造函数模式 | Mr.Li`s CodeLab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="创建对象通过 Object 构造函数或者对象字面量都可以用来创建单个对象，但这些方法有着明显的缺点：使用同一个接口创建很多个对象，会产生大量的重复代码。为解决这样的问题，工厂模式和构造函数模式应运而生。 工厂模式工厂模式是一种在软件工程领域内被广泛使用的一种设计模式，这种模式抽象了创建具体对象的过程。JS在 ECMAScript 中无法创建类，开发人员就发明了一种函数，用函数来封装以特定的接口创建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript设计模式：工厂模式及构造函数模式">
+<meta property="og:url" content="http://yoursite.com/2018/01/24/blog-5/index.html">
+<meta property="og:site_name" content="Mr.Li`s CodeLab">
+<meta property="og:description" content="创建对象通过 Object 构造函数或者对象字面量都可以用来创建单个对象，但这些方法有着明显的缺点：使用同一个接口创建很多个对象，会产生大量的重复代码。为解决这样的问题，工厂模式和构造函数模式应运而生。 工厂模式工厂模式是一种在软件工程领域内被广泛使用的一种设计模式，这种模式抽象了创建具体对象的过程。JS在 ECMAScript 中无法创建类，开发人员就发明了一种函数，用函数来封装以特定的接口创建">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2018-01-24T08:23:04.739Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript设计模式：工厂模式及构造函数模式">
+<meta name="twitter:description" content="创建对象通过 Object 构造函数或者对象字面量都可以用来创建单个对象，但这些方法有着明显的缺点：使用同一个接口创建很多个对象，会产生大量的重复代码。为解决这样的问题，工厂模式和构造函数模式应运而生。 工厂模式工厂模式是一种在软件工程领域内被广泛使用的一种设计模式，这种模式抽象了创建具体对象的过程。JS在 ECMAScript 中无法创建类，开发人员就发明了一种函数，用函数来封装以特定的接口创建">
+  
+    <link rel="alternate" href="/atom.xml" title="Mr.Li`s CodeLab" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Mr.Li`s CodeLab</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-blog-5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/24/blog-5/" class="article-date">
+  <time datetime="2018-01-24T15:56:21.000Z" itemprop="datePublished">2018-01-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript设计模式：工厂模式及构造函数模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><p>通过 Object 构造函数或者对象字面量都可以用来创建单个对象，但这些方法有着明显的缺点：使用同一个接口创建很多个对象，会产生大量的重复代码。为解决这样的问题，工厂模式和构造函数模式应运而生。</p>
+<h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><p>工厂模式是一种在软件工程领域内被广泛使用的一种设计模式，这种模式抽象了创建具体对象的过程。JS在 ECMAScript 中无法创建类，开发人员就发明了一种函数，用函数来封装以特定的接口创建对象的细节，代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span>(<span class="params">name, age, job</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">    obj.name = name;</span><br><span class="line">    obj.age = age;</span><br><span class="line">    obj.job = job;</span><br><span class="line">    obj.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> person1 = createPerson(<span class="string">"Arrow"</span>, <span class="number">35</span>, <span class="string">"hero"</span>);</span><br><span class="line"><span class="keyword">const</span> person2 = createPerson(<span class="string">"Flash"</span>, <span class="number">25</span>, <span class="string">"superHero"</span>);</span><br><span class="line"></span><br><span class="line">person1.sayName(); <span class="comment">// Name:Arrow Age:35 Job:hero</span></span><br><span class="line">person2.sayName(); <span class="comment">// Name:Flash Age:25 Job:superHero</span></span><br></pre></td></tr></table></figure></p>
+<p>函数 createPerson() 能够根据接受的参数来构建一个包含所有必要信息的 Person 对象。可以无数次的调用这个函数，而每次它都会返回一个包含三个属性和一个方法的对象。工厂模式解决了创建多个相似对象的问题，但却没有解决对象识别的问题（怎样知道一个对象的类型）。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/24/blog-5/" data-id="cjcssygcd0001istu7lt3i6p8" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/01/12/blog-4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">JavaScript设计模式：单例模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/design-pattern-singleton/">design pattern, singleton</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/puppeteer-nodeJS/">puppeteer nodeJS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stream/">stream</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/design-pattern-singleton/" style="font-size: 10px;">design pattern, singleton</a> <a href="/tags/puppeteer-nodeJS/" style="font-size: 10px;">puppeteer nodeJS</a> <a href="/tags/stream/" style="font-size: 10px;">stream</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/01/24/blog-5/">JavaScript设计模式：工厂模式及构造函数模式</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/12/blog-4/">JavaScript设计模式：单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/05/blog-3/">nodeJS 中的stream对象</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/04/blog-2/">做一个Javascript网页爬虫</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/26/blog-1/">Test Blog</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Lcoder<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
