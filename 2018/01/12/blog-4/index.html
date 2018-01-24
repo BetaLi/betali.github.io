@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Mr.Li`s CodeLab">
 <meta property="og:description" content="前言总是想绕却始终绕不开的设计模式，决定花点时间弄明白，先从单例模式开始。在开发工程师眼里，单例就是保证一个类只有一个实例，实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。 定义单例模式之所以这么叫，是因为它限制一个类只能有一个实">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2018-01-24T09:17:21.757Z">
+<meta property="og:updated_time" content="2018-01-24T09:20:00.757Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript设计模式：单例模式">
 <meta name="twitter:description" content="前言总是想绕却始终绕不开的设计模式，决定花点时间弄明白，先从单例模式开始。在开发工程师眼里，单例就是保证一个类只有一个实例，实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。 定义单例模式之所以这么叫，是因为它限制一个类只能有一个实">
@@ -56,7 +56,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -94,14 +94,14 @@
 <h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><p>在四人帮(GoF)的书里面，单例模式的应用描述如下：</p>
 <ul>
 <li>每个类只有一个实例，这个实例必须通过一个广为人知的接口，来被客户访问。</li>
-<li>子类如果要扩展这个唯一的实例，客户可以不用修改代码就能使用这个扩展后的实例。<br>关于第二点，可以参考如下的实例，我们需要这样编码:<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mySingleton.getInstance = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">this</span>.instance)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">Math</span>.random()&gt;<span class="number">0.5</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.instance = <span class="keyword">this</span>.init();</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.instance = <span class="keyword">this</span>.init_2();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
+<li>子类如果要扩展这个唯一的实例，客户可以不用修改代码就能使用这个扩展后的实例。</li>
 </ul>
+<p>关于第二点，可以参考如下的实例，我们需要这样编码:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mySingleton.getInstance = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">this</span>.instance)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">Math</span>.random()&gt;<span class="number">0.5</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.instance = <span class="keyword">this</span>.init();</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.instance = <span class="keyword">this</span>.init_2();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/12/blog-4/" data-id="cjcssygcq0005istua60rp8ed" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/12/blog-4/" data-id="cjcssygcq0005istua60rp8ed" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/design-pattern-singleton/">design pattern, singleton</a></li></ul>
@@ -113,7 +113,7 @@
 <nav id="article-nav">
   
     <a href="/2018/01/24/blog-5/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Neuer</strong>
       <div class="article-nav-title">
         
           JavaScript设计模式：工厂模式及构造函数模式
@@ -123,7 +123,7 @@
   
   
     <a href="/2018/01/05/blog-3/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Älter</strong>
       <div class="article-nav-title">nodeJS 中的stream对象</div>
     </a>
   
@@ -160,7 +160,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
     </div>
@@ -170,7 +170,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
         

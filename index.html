@@ -51,7 +51,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -92,13 +92,14 @@
 <ul>
 <li>没有显示的创建对象；</li>
 <li>直接将属性和方法赋给了 this 对象；</li>
-<li>没有 return 语句。<br>要创建 Person 的新实例，必须要使用 new 操作符。以这种方式调用构造函数实际上会经历以下4个步骤：<br>1、创建一个新对象；<br>2、将构造函数的作用域赋给新对象（因此 this 指向这个新对象）；<br>3、执行构造函数中的代码（为这个新对象添加属性）；<br>4、返回新对象。</li>
+<li>没有 return 语句。</li>
 </ul>
+<p>要创建 Person 的新实例，必须要使用 new 操作符。以这种方式调用构造函数实际上会经历以下4个步骤：<br>1、创建一个新对象；<br>2、将构造函数的作用域赋给新对象（因此 this 指向这个新对象）；<br>3、执行构造函数中的代码（为这个新对象添加属性）；<br>4、返回新对象。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/24/blog-5/" data-id="cjcssygcd0001istu7lt3i6p8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/24/blog-5/" data-id="cjcssygcd0001istu7lt3i6p8" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/factory-constructor/">factory constructor</a></li></ul>
@@ -139,14 +140,14 @@
 <h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><p>在四人帮(GoF)的书里面，单例模式的应用描述如下：</p>
 <ul>
 <li>每个类只有一个实例，这个实例必须通过一个广为人知的接口，来被客户访问。</li>
-<li>子类如果要扩展这个唯一的实例，客户可以不用修改代码就能使用这个扩展后的实例。<br>关于第二点，可以参考如下的实例，我们需要这样编码:<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mySingleton.getInstance = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">this</span>.instance)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">Math</span>.random()&gt;<span class="number">0.5</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.instance = <span class="keyword">this</span>.init();</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.instance = <span class="keyword">this</span>.init_2();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
+<li>子类如果要扩展这个唯一的实例，客户可以不用修改代码就能使用这个扩展后的实例。</li>
 </ul>
+<p>关于第二点，可以参考如下的实例，我们需要这样编码:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mySingleton.getInstance = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">this</span>.instance)&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">Math</span>.random()&gt;<span class="number">0.5</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.instance = <span class="keyword">this</span>.init();</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.instance = <span class="keyword">this</span>.init_2();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/12/blog-4/" data-id="cjcssygcq0005istua60rp8ed" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/12/blog-4/" data-id="cjcssygcq0005istua60rp8ed" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/design-pattern-singleton/">design pattern, singleton</a></li></ul>
@@ -203,7 +204,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/05/blog-3/" data-id="cjcssygck0003istu235wjnuh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/05/blog-3/" data-id="cjcssygck0003istu235wjnuh" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stream/">stream</a></li></ul>
@@ -252,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/04/blog-2/" data-id="cjcssygch0002istuarkgn38e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/04/blog-2/" data-id="cjcssygch0002istuarkgn38e" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/puppeteer-nodeJS/">puppeteer nodeJS</a></li></ul>
@@ -292,7 +293,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/26/blog-1/" data-id="cjcssygc30000istusmdedj08" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/26/blog-1/" data-id="cjcssygc30000istusmdedj08" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -338,7 +339,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/25/hello-world/" data-id="cjcssygcs0006istuabcafzwo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/25/hello-world/" data-id="cjcssygcs0006istuabcafzwo" class="article-share-link">Teilen</a>
       
       
     </footer>
@@ -378,7 +379,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
     </div>
@@ -388,7 +389,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
         

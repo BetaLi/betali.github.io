@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Mr.Li`s CodeLab">
 <meta property="og:description" content="创建对象通过 Object 构造函数或者对象字面量都可以用来创建单个对象，但这些方法有着明显的缺点：使用同一个接口创建很多个对象，会产生大量的重复代码。为解决这样的问题，工厂模式和构造函数模式应运而生。 工厂模式工厂模式是一种在软件工程领域内被广泛使用的一种设计模式，这种模式抽象了创建具体对象的过程。JS在 ECMAScript 中无法创建类，开发人员就发明了一种函数，用函数来封装以特定的接口创建">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2018-01-24T09:17:21.772Z">
+<meta property="og:updated_time" content="2018-01-24T09:20:00.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript设计模式：工厂模式及构造函数模式">
 <meta name="twitter:description" content="创建对象通过 Object 构造函数或者对象字面量都可以用来创建单个对象，但这些方法有着明显的缺点：使用同一个接口创建很多个对象，会产生大量的重复代码。为解决这样的问题，工厂模式和构造函数模式应运而生。 工厂模式工厂模式是一种在软件工程领域内被广泛使用的一种设计模式，这种模式抽象了创建具体对象的过程。JS在 ECMAScript 中无法创建类，开发人员就发明了一种函数，用函数来封装以特定的接口创建">
@@ -56,7 +56,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -95,13 +95,14 @@
 <ul>
 <li>没有显示的创建对象；</li>
 <li>直接将属性和方法赋给了 this 对象；</li>
-<li>没有 return 语句。<br>要创建 Person 的新实例，必须要使用 new 操作符。以这种方式调用构造函数实际上会经历以下4个步骤：<br>1、创建一个新对象；<br>2、将构造函数的作用域赋给新对象（因此 this 指向这个新对象）；<br>3、执行构造函数中的代码（为这个新对象添加属性）；<br>4、返回新对象。</li>
+<li>没有 return 语句。</li>
 </ul>
+<p>要创建 Person 的新实例，必须要使用 new 操作符。以这种方式调用构造函数实际上会经历以下4个步骤：<br>1、创建一个新对象；<br>2、将构造函数的作用域赋给新对象（因此 this 指向这个新对象）；<br>3、执行构造函数中的代码（为这个新对象添加属性）；<br>4、返回新对象。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/24/blog-5/" data-id="cjcssygcd0001istu7lt3i6p8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/24/blog-5/" data-id="cjcssygcd0001istu7lt3i6p8" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/factory-constructor/">factory constructor</a></li></ul>
@@ -114,7 +115,7 @@
   
   
     <a href="/2018/01/12/blog-4/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Älter</strong>
       <div class="article-nav-title">JavaScript设计模式：单例模式</div>
     </a>
   
@@ -151,7 +152,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
     </div>
@@ -161,7 +162,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
         
