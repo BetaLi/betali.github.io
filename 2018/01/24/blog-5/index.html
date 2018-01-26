@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Mr.Li`s CodeLab">
 <meta property="og:description" content="创建对象通过 Object 构造函数或者对象字面量都可以用来创建单个对象，但这些方法有着明显的缺点：使用同一个接口创建很多个对象，会产生大量的重复代码。为解决这样的问题，工厂模式和构造函数模式应运而生。 工厂模式工厂模式是一种在软件工程领域内被广泛使用的一种设计模式，这种模式抽象了创建具体对象的过程。JS在 ECMAScript 中无法创建类，开发人员就发明了一种函数，用函数来封装以特定的接口创建">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2018-01-26T07:24:52.321Z">
+<meta property="og:updated_time" content="2018-01-26T07:52:25.248Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript设计模式：工厂模式及构造函数模式">
 <meta name="twitter:description" content="创建对象通过 Object 构造函数或者对象字面量都可以用来创建单个对象，但这些方法有着明显的缺点：使用同一个接口创建很多个对象，会产生大量的重复代码。为解决这样的问题，工厂模式和构造函数模式应运而生。 工厂模式工厂模式是一种在软件工程领域内被广泛使用的一种设计模式，这种模式抽象了创建具体对象的过程。JS在 ECMAScript 中无法创建类，开发人员就发明了一种函数，用函数来封装以特定的接口创建">
@@ -56,7 +56,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -101,11 +101,13 @@
 <p>对象的constructor属性一开始是为了标识对象类型的。但是，提到类型检测时发现，通过 instanceof来检测更为可靠一点。本例子中创建的所有对象即是 Object的实例，同时也是 Person的实例，这一点可以通过 instanceof操作符来验证。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(person1 <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(person1 <span class="keyword">instanceof</span> Person); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(person2 <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(person2 <span class="keyword">instanceof</span> Person); <span class="comment">//true</span></span><br></pre></td></tr></table></figure></p>
 <p>创造自定义的构造函数意味着可以将他的实例标识为一种特定的类型，这也正是构造函数模式胜过工厂模式的地方。</p>
 <h4 id="将构造函数当作普通的函数"><a href="#将构造函数当作普通的函数" class="headerlink" title="将构造函数当作普通的函数"></a>将构造函数当作普通的函数</h4><p>构造函数与普通函数的唯一区别就是其调用的方式不同。不过，构造函数也是函数，不存在定义构造函数的特殊语法。任何函数，只要其通过 new操作符来调用，那他就可以作为构造函数；同样，任何函数如果不通过 new操作符来调用，那么他和普通函数就没什么区别。例如，前面的例子可以通过以下的任一方式来调用。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//当作构造函数来调用</span></span><br><span class="line"><span class="keyword">const</span> person1 = <span class="keyword">new</span> Person(<span class="string">"Arrow"</span>, <span class="number">35</span>, <span class="string">"Hero"</span>);</span><br><span class="line">person1.sayPerson(); <span class="comment">//Name:Arrow Age:35 Job:Hero</span></span><br><span class="line"><span class="comment">//作为普通函数来调用</span></span><br><span class="line">Person(<span class="string">"SuperGirl"</span>, <span class="number">22</span>, <span class="string">"femaleHero"</span>);</span><br><span class="line"><span class="built_in">window</span>.sayPerson(); <span class="comment">//Name:SuperGirl Age:22 Job:femaleHero</span></span><br><span class="line"><span class="comment">//在另一个对象的作用域中调用</span></span><br><span class="line"><span class="keyword">const</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">Person.call(o, <span class="string">"superMan"</span>, <span class="number">28</span>, <span class="string">"manHero"</span>);</span><br><span class="line">o.sayPerson(); <span class="comment">//Name:superMan Age:28 Job:manHero</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="构造函数存在的问题"><a href="#构造函数存在的问题" class="headerlink" title="构造函数存在的问题"></a>构造函数存在的问题</h4><p>使用构造函数的主要问题，就是每个方法都需要在每个实例上重新创建一遍。在前面的例子中，person1和 person2都用一个名为 sayPerson()的方法，但两个方法并不是同一个 Function的实例。然而，创建两个完成同样任务的 Function实例的确没有必要；何况有 this对象在，根本不用在执行代码前就把函数绑定到特定对象上面。因此，可以通过把函数定义转移到构造函数外部来解决这个问题。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age, job</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.job = job;</span><br><span class="line">    <span class="keyword">this</span>.sayPerson = sayPerson;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayPerson</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"Name:"</span>+<span class="keyword">this</span>.name+<span class="string">" Age:"</span>+<span class="keyword">this</span>.age+<span class="string">" Job:"</span>+<span class="keyword">this</span>.job);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> person1 = <span class="keyword">new</span> Person(<span class="string">"Arrow"</span>, <span class="number">35</span>, <span class="string">"Hero"</span>);</span><br><span class="line"><span class="keyword">const</span> person2 = <span class="keyword">new</span> Person(<span class="string">"Flash"</span>, <span class="number">25</span>, <span class="string">"SuperHero"</span>);</span><br></pre></td></tr></table></figure></p>
+<p>在上述的实例中，把sayPerson()函数的定义转移到了构造函数的外部。在构造函数的内部，将sayPerson的属性设置成了全局的 sayPerson()函数。由于 sayPerson包含的是一个指向函数的指针，因此 person1和 person2对象就共享了在全局作用域中定义的同一个sayPerson()函数。这样做的确解决了函数共享的问题，但出现了新的问题：如果对象需要定义许多方法，那么就要定义很多个全局函数，于是自定义的引用类型就丝毫没有封装性可言了。好在，这些问题可以通过原型模式来解决。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/24/blog-5/" data-id="cjcssygcd0001istu7lt3i6p8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/24/blog-5/" data-id="cjcssygcd0001istu7lt3i6p8" class="article-share-link">Teilen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/factory-constructor/">factory constructor</a></li></ul>
@@ -118,7 +120,7 @@
   
   
     <a href="/2018/01/12/blog-4/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Älter</strong>
       <div class="article-nav-title">JavaScript设计模式：单例模式</div>
     </a>
   
@@ -155,7 +157,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li></ul>
     </div>
@@ -165,7 +167,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
         
