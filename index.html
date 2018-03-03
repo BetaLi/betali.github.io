@@ -84,7 +84,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="了解Nginx"><a href="#了解Nginx" class="headerlink" title="了解Nginx"></a>了解Nginx</h2><p>Nginx是一个轻量级、高性能的HTTP和反向代理服务器，也是一个IMAP/POP3/SMTP邮件服务器。其特点是占有内存少，并发能力强，事实上nginx的并发能力确实在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。</p>
+        <h2 id="了解Nginx"><a href="#了解Nginx" class="headerlink" title="了解Nginx"></a>了解Nginx</h2><p>Nginx是一个轻量级、高性能的HTTP和反向代理服务器，也是一个IMAP/POP3/SMTP邮件服务器。其特点是占有内存少，并发能力强，事实上nginx的并发能力确实在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。<br>Nginx属于一种中间件架构，中间件有代理、分发任务的作用。在中间件的使用中，HTTP中间件使用的最多，在企业中应用广泛；常见的HTTP中间件服务有：HTTPD–Apache基金会、IIS–微软、GWS–Google、Nginx–BSD等。<br>Nginx支持epoll、select、kqueue等不同操作系统下的各种IO多路复用方式，下面就一个网上的小例子来通俗的介绍多路复用的含义。一个epoll场景：一个酒吧服务员（一个线程），前面趴了一群醉汉，突然一个吼一声“倒酒”（事件），你小跑过去给他倒一杯，然后随他去吧，突然又一个要倒酒，你又过去倒上，就这样一个服务员服务好多人，有时没人喝酒，服务员处于空闲状态，可以干点别的玩玩手机。至于epoll与select，poll的区别在于后两者的场景中醉汉不说话，你要挨个问要不要酒，没时间玩手机了。io多路复用大概就是指这几个醉汉共用一个服务员。<br><img src="https://pic1.zhimg.com/80/18d8525aceddb840ea4c131002716221_hd.jpg" alt="epoll 模型"><br>在同一个线程里面， 通过拨开关的方式，来同时传输多个I/O流,仔细理解上面这个图就知道了IO多路复用的含义。</p>
 
       
     </div>
